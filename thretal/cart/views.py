@@ -69,7 +69,7 @@ class CartRemove(View):
             c.delete()
         except:
             pass
-        return redirect('cartview')
+        return redirect('cart:cartview')
 
 
 
