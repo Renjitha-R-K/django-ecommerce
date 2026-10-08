@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+{% for i in messages %}
+{{i}}
+{% endfor %}
+{% else %}
+<div class="container w-50 p-5 mt-5 text-center">
+<form action="{% url 'cart:paymentsuccess' name %}" method="POST">
+    {% csrf_token %}
+<script
+   src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_SBxSuuJHODQPZz"
+    data-amount="{{payment.amount}}"
+    data-currency="INR"
+    data-order_id="{{payment.id}}"
+    data-buttontext="Pay with Razorpay"
+    data-name="Thretal"
+    data-description="Thretal brings together trendy clothing and thoughtfully chosen accessories to help you express your style with confidence".
+    data-image="https://example.com/your_logo.jpg"
+    data-prefill.name="{{name}}"
+    data-prefill.email="{{user.email}}"
+    data-theme.color="black">
+
+</script>
+<input type="hidden" custom="Hidden Element" name="hidden"/>
+</form>
+    </div>
+{% endif %}
+{% endblock %}

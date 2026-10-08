@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<style>
+.checkout-address input,
+.checkout-address textarea,
+.checkout-address select {
+    border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+    width: 100%;
+    border-radius: .375rem;
+}
+
+.checkout-address input:focus,
+.checkout-address textarea:focus,
+.checkout-address select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.25);
+}
+.custom-control-input {
+    display: none;
+}
+
+.custom-control-label::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0d6efd;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+<!-- Title -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Checkout</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item active">Checkout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout -->
+<div class="cart-box-main">
+    <div class="container border border-dark">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="row mt-3 p-3">
+
+                <!-- Billing -->
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>Billing Details</h3>
+                        </div>
+
+                        <div class="row p-4 mt-4">
+
+                               {{form.as_p}}
+                            <input type="submit">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-6">
+                    <div class="order-box">
+                        <div class="title-left">
+                            <h3>Your Order</h3>
+                        </div>
+
+                        <div class="d-flex">
+                            <div>Sub Total</div>
+                            <div class="ml-auto font-weight-bold"> {{cart_total}}</div>
+                        </div>
+
+                        <div class="d-flex">
+                            <div>Shipping</div>
+                            <div class="ml-auto font-weight-bold">Free</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex gr-total">
+                            <h5>Grand Total</h5>
+                            <div class="ml-auto h5">$ {{ total }}</div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Shipping -->
+                        <div class="title-left">
+                            <h3>Shipping Method</h3>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="ship1" name="shipping" value="free"
+                                   class="custom-control-input" checked>
+                            <label class="custom-control-label" for="ship1">
+                                Standard Delivery (Free)
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-radio mt-2">
+                            <input type="radio" id="ship2" name="shipping" value="express"
+                                   class="custom-control-input">
+                            <label class="custom-control-label" for="ship2">
+                                Express Delivery ($10)
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn hvr-hover btn-block mt-4">
+                            Place Order
+                        </button>
+
+                    </div>
+                </div>
+                </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

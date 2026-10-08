@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if method == 'COD' %}
+<h2>Order Placed Successfully!</h2>
+    <p>Payment Method: Cash on Delivery</p>
+{% else %}
+    <h2>Payment Successful!</h2>
+    <p>Payment Method: Online</p>
+{% endif %}
+
+{% endblock %}
